@@ -1,0 +1,19 @@
+version: '3.6'
+services:
+  frontend:
+    container_name: ddev-${DDEV_SITENAME}-frontend
+    build:
+      context: ../web/frontend
+
+    # These labels ensure this service is discoverable by ddev.
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: $DDEV_APPROOT
+
+    ports:
+      - 3000:3000
+
+    volumes:
+    - "../web/frontend:/app"
+
+    command: 'npm run dev'
